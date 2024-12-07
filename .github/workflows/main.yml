@@ -34,7 +34,10 @@ jobs:
       run: |
         poetry run python manage.py collectstatic --noinput
         poetry run python manage.py distill-local dist --force
-
+    
+    - name: Copy CNAME file
+      run: |
+        cp CNAME dist/
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
