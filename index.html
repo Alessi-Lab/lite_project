@@ -11,6 +11,11 @@
                 <a class="navbar-item" href="/">
                     LITE
                 </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarHidden">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                </a>
             </div>
             <div class="navbar-menu">
                 <div class="navbar-start">
@@ -18,6 +23,11 @@
                     <a class="navbar-item" href="/posts">Posts</a>
                     <a class="navbar-item" href="/forms">Forms</a>
                     <a class="navbar-item" href="/contact">Contact</a>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <button class="button is-primary" id="qr-button">QR</button>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -38,5 +48,75 @@
     <footer>
         <p></p>
     </footer>
+<div class="modal" id="qr-modal">
+    <div class="modal-background is-clipped"></div>
+    <div class="modal-card" style="width:320px; max-width: None">
+        <header class="modal-card-head">
+            <p class="modal-card-title">QR Code</p>
+        </header>
+        <section class="modal-card-body">
+            <div class="is-flex is-flex-direction-column is-justify-content-center is-gap-2">
+                <div id="qrcode" class="is-flex is-justify-content-center"></div>
+            </div>
+        </section>
+        <footer class="modal-card-foot is-flex is-gap-2">
+            <button class="button" id="close-modal">Close</button>
+            <button class="button is-primary" id="download-qr">Download QR Code</button>
+        </footer>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const qrButton = document.getElementById('qr-button');
+        const qrModal = document.getElementById('qr-modal');
+        const closeModalButton = document.getElementById('close-modal');
+        const qrCodeContainer = document.getElementById('qrcode');
+        const downloadButton = document.getElementById('download-qr');
+        const burger = document.querySelector('.navbar-burger');
+        const menu = document.querySelector('.navbar-menu');
+
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('is-active');
+            menu.classList.toggle('is-active');
+        });
+
+        qrButton.addEventListener('click', () => {
+            const currentUrl = window.location.href;
+            if (currentUrl) {
+                qrCodeContainer.innerHTML = '';
+                const canvas = document.createElement('canvas');
+                qrCodeContainer.appendChild(canvas);
+                QRCode.toCanvas(canvas, currentUrl, function (error) {
+                    if (error) {
+                        console.error(error);
+                    } else {
+                        qrModal.classList.add('is-active');
+                    }
+                });
+            } else {
+                console.error('Invalid URL');
+            }
+        });
+
+        downloadButton.addEventListener('click', () => {
+            const canvas = qrCodeContainer.querySelector('canvas');
+            if (canvas) {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'qrcode.png';
+                link.click();
+            }
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            qrModal.classList.remove('is-active');
+        });
+
+        qrModal.querySelector('.modal-background').addEventListener('click', () => {
+            qrModal.classList.remove('is-active');
+        });
+    });
+</script>
 </body>
 </html>
