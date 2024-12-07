@@ -1,5 +1,5 @@
 .idea
 static
 dist
-db.sqlite3
+#db.sqlite3
 *.pyc
