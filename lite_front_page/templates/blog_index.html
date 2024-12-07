@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Post Index{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Posts</h1>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            {% for post in posts %}
+                <div class="box">
+                <h2><a href="{{ post.id }}/index.html">{{ post.title }}</a></h2>
+                    <p>{{ post.body|truncatewords:30 }}</p>
+                <p><em>{{ post.created_at }}</em></p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}

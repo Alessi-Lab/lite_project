@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "lite-project"
+version = "0.1.0"
+description = ""
+authors = ["Toan Phung <toan.phung@proteo.info>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django-distill = "^3.2.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
