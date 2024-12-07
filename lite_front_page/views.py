@@ -5,6 +5,12 @@ from lite_front_page.models import BlogPost
 def home_index(request):
     return render(request, 'home_index.html')
 
+def forms_index(request):
+    return render(request, 'forms_index.html')
+
+def contact_index(request):
+    return render(request, 'contact_index.html')
+
 def blog_detail(request, id=None):
     post = get_object_or_404(BlogPost, id=id)
     return render(request, 'blog_detail.html', {'post': post})

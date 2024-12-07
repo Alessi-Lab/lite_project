@@ -17,7 +17,7 @@ Including another URLconf
 from django_distill import distill_path
 
 from lite_front_page.models import BlogPost
-from lite_front_page.views import blog_index, blog_detail, home_index
+from lite_front_page.views import blog_index, blog_detail, home_index, forms_index, contact_index
 
 
 def get_blog_posts():
@@ -26,6 +26,8 @@ def get_blog_posts():
 
 urlpatterns = [
     distill_path('', home_index, name='home_index'),
+    distill_path('forms', forms_index, name='forms_index'),
+    distill_path('contact', contact_index, name='contact_index'),
     distill_path('posts/', blog_index, name='blog_index'),
     distill_path('posts/<int:id>/', blog_detail, name='blog_detail', distill_func=get_blog_posts),
 ]
