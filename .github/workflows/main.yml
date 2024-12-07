@@ -26,10 +26,14 @@ jobs:
       run: |
         poetry install
 
+    - name: Pre-create output directory
+      run: |
+        mkdir -p dist
+
     - name: Build static files
       run: |
         poetry run python manage.py collectstatic --noinput
-        yes | poetry run python manage.py distill-local dist
+        poetry run python manage.py distill-local dist
 
 
     - name: Deploy to GitHub Pages
