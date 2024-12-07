@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from lite_front_page.models import BlogPost
 
 # Create your views here.
+def home_index(request):
+    return render(request, 'home_index.html')
 
 def blog_detail(request, id=None):
     post = get_object_or_404(BlogPost, id=id)
