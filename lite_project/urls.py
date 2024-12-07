@@ -26,8 +26,8 @@ def get_blog_posts():
 
 urlpatterns = [
     distill_path('', home_index, name='home_index'),
-    distill_path('forms', forms_index, name='forms_index'),
-    distill_path('contact', contact_index, name='contact_index'),
+    distill_path('forms/', forms_index, name='forms_index'),
+    distill_path('contact/', contact_index, name='contact_index'),
     distill_path('posts/', blog_index, name='blog_index'),
     distill_path('posts/<int:id>/', blog_detail, name='blog_detail', distill_func=get_blog_posts),
 ]
